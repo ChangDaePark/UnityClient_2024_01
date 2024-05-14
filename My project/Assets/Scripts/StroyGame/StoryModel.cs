@@ -5,7 +5,7 @@ using UnityEngine;
 using static STORYGAME.StoryTableObject;
 
 
-[CreateAssetMenu(fileName = "NewStory", menuName = "ScriptableObjects/StoryTableObject")]
+[CreateAssetMenu(fileName = "NewStory", menuName = "ScriptableObjects/StoryModel")]
 public class StoryModel : ScriptableObject
 {
 
