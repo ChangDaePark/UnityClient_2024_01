@@ -10,13 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b92a797606a2ad41b22c1c5f1834218, type: 3}
-  m_Name: NewStory 1
+  m_Name: NewStory 2
   m_EditorClassIdentifier: 
-  storyNumber: 1
-  MainImage: {fileID: 2800000, guid: d7f66b24458aeab42a4724eec9cec806, type: 3}
+  storyNumber: 2
+  MainImage: {fileID: 2800000, guid: 8cf1fc961824c46418e43f280950f599, type: 3}
   storytype: 0
   storyDone: 0
-  storyText: 'Story 1 Story 1 Story 1 Story 1 Story 1 Story 1 Story 1 '
+  storyText: 'Story 2 Story 2
+
+    Story 2
+
+    Story 2
+
+    Story 2
+
+    Story 2
+
+
+'
   options:
   - optionText: 
     buttonText: "\uC120\uD0DD\uC9C01"
@@ -25,7 +36,7 @@ MonoBehaviour:
       eventType: 0
       successResult:
       - resultType: 4
-        value: 2
+        value: 1
         stats:
           hpPoint: 0
           spPoint: 0

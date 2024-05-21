@@ -13,7 +13,8 @@ public class StorySystem : MonoBehaviour
     {
         DOING,
         SELECT,
-        DONE
+        DONE,
+        NONE
     }
 
     public float delay = 0.1f;
@@ -25,6 +26,8 @@ public class StorySystem : MonoBehaviour
 
     public Button[] buttonWay = new Button[3];
     public Text[] buttonWayText = new Text[3];
+
+    public TEXTSYSTEM currentTextShow = TEXTSYSTEM.NONE;
 
 
     private void Awake()
@@ -41,8 +44,7 @@ public class StorySystem : MonoBehaviour
             buttonWay[i].onClick.AddListener(() => OnWayClick(wayIndex));
         }
 
-        StoryModelinit();
-        StartCoroutine(ShowText());
+        GoShowText();
     }
 
     public void StoryModelinit()
@@ -58,11 +60,43 @@ public class StorySystem : MonoBehaviour
 
     public void OnWayClick(int index)
     {
+        if (currentTextShow == TEXTSYSTEM.DOING)
+            return;
 
+        bool CheckEventTypeNone = false;
+        StoryModel playStoryModel = currentStoryModel;
+
+        if (playStoryModel.options[index].eventCheck.eventType == StoryModel.EventCheck.EventType.NONE)
+        {
+            for (int i = 0; i < playStoryModel.options[index].eventCheck.successResult.Length; i++)
+            {
+                GameSystem.instance.ApplyChoice(currentStoryModel.options[index].eventCheck.successResult[i]);
+                CheckEventTypeNone = true;  
+            }
+        }
+    }
+
+    public void GoShowText()
+    {
+        StoryModelinit();
+        ResetShow();
+        StartCoroutine(ShowText());
+    }
+
+    public void ResetShow()
+    {
+        textComponent.text = "";
+
+        for (int i = 0; i < buttonWay.Length; i++)
+        {
+            buttonWay[i].gameObject.SetActive(false);
+        }
     }
     
     IEnumerator ShowText()
     {
+        currentTextShow = TEXTSYSTEM.DOING;
+
         if (currentStoryModel.MainImage != null)
         {
             Rect rect = new Rect(0, 0, currentStoryModel.MainImage.width, currentStoryModel.MainImage.height);
@@ -90,5 +124,9 @@ public class StorySystem : MonoBehaviour
         }
 
         yield return new WaitForSeconds(delay);
+
+        currentTextShow = TEXTSYSTEM.NONE;
+
     }
+
 }
